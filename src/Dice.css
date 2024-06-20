@@ -1,0 +1,37 @@
+.dice {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  place-items: center;
+  grid-template-areas:
+  "a . c"
+  "e g f"
+  "d . b";
+  padding: 5px;
+}
+
+.dot {
+  background-color: #000;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}
+
+.dot:nth-child(2) {
+  grid-area: b;
+}
+.dot:nth-child(3) {
+  grid-area: c;
+}
+.dot:nth-child(4) {
+  grid-area: d;
+}
+.dot:nth-child(5) {
+  grid-area: e;
+}
+.dot:nth-child(6) {
+  grid-area: f;
+}
+
+.dot:nth-child(odd):last-child {
+  grid-area: g;
+}

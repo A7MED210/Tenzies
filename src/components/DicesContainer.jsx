@@ -2,20 +2,19 @@ import { nanoid } from "nanoid"
 import randomInteger from "random-int"
 import { useState, useEffect } from "react"
 import Confetti from "react-confetti"
+import Dice from "./Dice"
 
 export default function DicesContainer() {
   const [dices, setDices] = useState(randomDices())
   const [tenzies, setTenzies] = useState(false)
 
   useEffect(() => {
-    console.log("second effect")
     if (
       dices.every((dice) => {
         return dice.selected && dice.num === dices[0].num
       })
     ) {
       setTenzies(true)
-      console.log("you won")
     }
   }, [dices])
 
@@ -52,13 +51,13 @@ export default function DicesContainer() {
   }
 
   const diceElements = dices.map((dice) => (
-    <div
-      className={`dice ${dice.selected && "selected"}`}
-      onClick={() => !dice.selected && changeSelected(dice.id)}
+    <Dice
       key={dice.id}
-    >
-      {dice.num}
-    </div>
+      id={dice.id}
+      selected={dice.selected}
+      num={dice.num}
+      holdDice={changeSelected}
+    />
   ))
 
   return (
