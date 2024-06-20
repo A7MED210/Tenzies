@@ -7,6 +7,7 @@ import Dice from "./Dice"
 export default function DicesContainer() {
   const [dices, setDices] = useState(randomDices())
   const [tenzies, setTenzies] = useState(false)
+  const [trials, setTrials] = useState(0)
 
   useEffect(() => {
     if (
@@ -31,6 +32,7 @@ export default function DicesContainer() {
     if (tenzies) {
       setDices(newRolls)
       setTenzies(false)
+      setTrials(0)
     } else {
       setDices((prev) =>
         prev.map((dice, index) => ({
@@ -38,6 +40,7 @@ export default function DicesContainer() {
           num: dice.selected ? dice.num : newRolls[index].num,
         }))
       )
+      setTrials((prev) => prev + 1)
     }
   }
 
@@ -68,6 +71,10 @@ export default function DicesContainer() {
         Roll until all dice are the same. Click each die to freeze it at its
         current value between rolls.
       </p>
+      <div className="trials">
+        <h3 className="text">Trials: </h3>
+        <p className="num">{trials}</p>
+      </div>
       <div className="dices-container">{diceElements}</div>
       <button onClick={rollDices}>{tenzies ? "New Game" : "Roll"}</button>
     </>
